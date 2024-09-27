@@ -32,7 +32,7 @@ jobs:
 
       - name: set_environment
         run: |
-          if [[ "${{ github.ref }}" == "refs/head/master" ]]
+          if [[ "${{ github.ref }}" == "refs/heads/master" ]]
           then
             echo "Entorno productivo"
             export environment="prod"
@@ -47,16 +47,16 @@ jobs:
 
       - name: select_workspace
         run: |
-          if [[ "${{ github.ref }}" == "refs/head/master" ]]
+          if [[ "${{ github.ref }}" == "refs/heads/master" ]]
           then
-            terraform workspace select  -or-create prod
+            terraform workspace select -or-create prod
           else
-            terraform workspace select  -or-create dev
+            terraform workspace select -or-create dev
           fi
 
       - name: terraform_plan
         run: |
-          if [[ "${{ github.ref }}" == "refs/head/master" ]]
+          if [[ "${{ github.ref }}" == "refs/heads/master" ]]
           then
             terraform plan -var-file prod.tfvars
           else
@@ -65,7 +65,7 @@ jobs:
             
       - name: terraform_apply
         run: |
-          if [[ "${{ github.ref }}" == "refs/head/master" ]]
+          if [[ "${{ github.ref }}" == "refs/heads/master" ]]
           then
             terraform apply -var-file prod.tfvars -auto-approve
           else
