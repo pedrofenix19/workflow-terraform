@@ -5,7 +5,7 @@ resource "aws_s3_bucket" "bucket" {
     rule {
       apply_server_side_encryption_by_default {
         sse_algorithm = var.environment == "prod" ? "aws:kms" : "AES256"
-        kms_master_key_id = var.environment == "prod" ? module.pedro_key.key_arn : null
+        kms_master_key_id = var.environment == "prod" ? module.pedro_key : null
       }
     }
   }
