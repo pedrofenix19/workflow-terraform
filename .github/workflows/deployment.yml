@@ -32,10 +32,12 @@ jobs:
 
       - name: set_environment
         run: |
-          if [[ "${{ github.ref }}" == "refs/head/master" ]] then
+          if [[ "${{ github.ref }}" == "refs/head/master" ]]
+          then
             echo "Entorno productivo"
             export environment="prod"
-          elif [[ "${{ github.ref }}" == "refs/head/dev"]] then
+          else
+          then
             echo "Entorno desarrollo"
             export environment="dev"
           fi
