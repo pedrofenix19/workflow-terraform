@@ -60,7 +60,7 @@ jobs:
       - uses: trstringer/manual-approval@v1
         with:
           secret: ${{ github.TOKEN }}
-          approvers: collaborators
+          approvers: pedrofenix19
           minimum-approvals: 1
           issue-title: "Despliegue"
           issue-body: "Por favor aprobar el despliegue"
