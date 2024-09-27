@@ -14,6 +14,8 @@ env:
 jobs:
   terraform :
     runs-on: ubuntu-latest
+    permissions:
+      issues: write  # Permisos para crear issues
     steps: 
       - name: clone_repo
         uses: actions/checkout@v3
