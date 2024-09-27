@@ -47,7 +47,8 @@ jobs:
 
       - name: select_workspace
         run: |
-          terraform workspace select $environment -or-create
+          echo $environment
+          terraform workspace select $environment 
 
       - name: terraform_plan
         run: |
