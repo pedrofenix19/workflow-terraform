@@ -47,17 +47,29 @@ jobs:
 
       - name: select_workspace
         run: |
-          echo $environment
-          terraform workspace select $environment 
+          if [[ "${{ github.ref }}" == "refs/head/master" ]]
+          then
+            terraform workspace select prod -or-create
+          else
+            terraform workspace select dev -or-create
+          fi
 
       - name: terraform_plan
         run: |
-          ls -la
-          env
-          terraform plan -var-file $environment.tfvars
-
+          if [[ "${{ github.ref }}" == "refs/head/master" ]]
+          then
+            terraform plan -var-file prod.tfvars
+          else
+            terraform plan -var-file dev.tfvars
+          fi
+            
       - name: terraform_apply
         run: |
-          terraform apply -var-file $environment.tfvars -auto-approve
+          if [[ "${{ github.ref }}" == "refs/head/master" ]]
+          then
+            terraform apply -var-file prod.tfvars -auto-approve
+          else
+            terraform apply -var-file dev.tfvars -auto-approve
+          fi
 
   
