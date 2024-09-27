@@ -7,30 +7,30 @@ on:
       - master
     
 env:
-    AWS_REGION: 'us-east-1'
-    AWS_ACCESS_KEY_ID: '${{ secrets.AWS_ACCESS_KEY_ID }}'
-    AWS_SECRET_ACCESS_KEY: '${{ secrets.AWS_SECRETS_ACCESS_KEY }}'
+  AWS_REGION: 'us-east-1'
+  AWS_ACCESS_KEY_ID: '${{ secrets.AWS_ACCESS_KEY_ID }}'
+  AWS_SECRET_ACCESS_KEY: '${{ secrets.AWS_SECRETS_ACCESS_KEY }}'
 
 jobs:
-    terraform :
-        runs-on: ubuntu-latest
-        steps: 
-            - name: clone_repo
-              uses: actions/checkout@v3
+  terraform :
+    runs-on: ubuntu-latest
+    steps: 
+      - name: clone_repo
+        uses: actions/checkout@v3
 
-            - name: install_terraform
-              uses: hashicorp/setup-terraform@v3
-              with: 
-                terraform_version: "1.9.6"
+      - name: install_terraform
+        uses: hashicorp/setup-terraform@v3
+        with: 
+          terraform_version: "1.9.6"
 
-            - name: terraform_init
-              run: |
-                terraform init
+      - name: terraform_init
+        run: |
+          terraform init
 
-            - name: terraform_plan
-              run: |
-                ls -la
-                env
-                terraform plan
+      - name: terraform_plan
+        run: |
+          ls -la
+          env
+          terraform plan
 
   
