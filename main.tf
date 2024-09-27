@@ -12,6 +12,7 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 module "pedro_key" {
+  count = var.environment == "prod"? 1: 0
   source = "terraform-aws-modules/kms/aws"
 
   description = "Pedro KMS key"
