@@ -37,7 +37,6 @@ jobs:
             echo "Entorno productivo"
             export environment="prod"
           else
-          then
             echo "Entorno desarrollo"
             export environment="dev"
           fi
