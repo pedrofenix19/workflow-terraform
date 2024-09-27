@@ -49,9 +49,9 @@ jobs:
         run: |
           if [[ "${{ github.ref }}" == "refs/head/master" ]]
           then
-            terraform workspace select prod -or-create
+            terraform workspace select  -or-create prod
           else
-            terraform workspace select dev -or-create
+            terraform workspace select  -or-create dev
           fi
 
       - name: terraform_plan
