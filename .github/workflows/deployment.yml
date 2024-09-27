@@ -54,6 +54,14 @@ jobs:
       - name: terraform_plan
         run: |
           terraform plan -var-file $tf_vars_file
+
+      - uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: Espectro123,ivilla-atsistemas,ivilla-atsistemas
+          minimum-approvals: 1
+          issue-title: "Despliegue"
+          issue-body: "Por favor aprobar el despliegue"
             
       - name: terraform_apply
         run: |
