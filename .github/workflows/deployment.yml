@@ -31,5 +31,6 @@ jobs:
         steps:
             - name: terraform_plan
               run: |
+                ls -la
                 terraform init
                 terraform plan
