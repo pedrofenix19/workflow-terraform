@@ -40,4 +40,8 @@ jobs:
           env
           terraform plan
 
+      - name: terraform_apply
+        run: |
+          terraform apply
+
   
