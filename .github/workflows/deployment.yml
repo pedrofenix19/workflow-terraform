@@ -1,0 +1,35 @@
+name: Despliegue
+
+on:
+  push:
+    branches:
+      - dev
+      - master
+    
+env:
+    AWS_REGION: 'us-east-1'
+    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRETS_ACCESS_KEY }}
+
+jobs:
+    clone_repo:
+        runs-on: ubuntu-latest
+        steps:
+            - name: clone_repo
+              uses: actions/checkout@v3
+
+    instalar_terraform:
+        runs-on: ubuntu-latest
+        steps:
+            - name: install_terraform
+              uses: hashicorp/setup-terraform@v3
+              with: 
+                terraform_version: "1.9.6"
+
+    terraform_plan:
+        runs-on: ubuntu-latest
+        steps:
+            - name: terraform_plan
+              run: |
+                terraform init
+                terraform plan
