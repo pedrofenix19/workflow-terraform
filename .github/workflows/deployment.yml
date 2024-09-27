@@ -58,7 +58,7 @@ jobs:
       - uses: trstringer/manual-approval@v1
         with:
           secret: ${{ github.TOKEN }}
-          approvers: Espectro123,ivilla-atsistemas,ivilla-atsistemas
+          approvers: collaborators
           minimum-approvals: 1
           issue-title: "Despliegue"
           issue-body: "Por favor aprobar el despliegue"
