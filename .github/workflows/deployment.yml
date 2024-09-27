@@ -56,6 +56,7 @@ jobs:
       - name: Wait for approval
         uses: trstringer/manual-approval@v1
         with:
+          secret: ${{ github.TOKEN }}
           approvers: pedrofenix19
           minimum-approvals: 1
             
