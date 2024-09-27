@@ -36,9 +36,11 @@ jobs:
           then
             echo "Entorno productivo"
             echo "environment=prod" >> $GITHUB_ENV
+            echo "tf_vars_file=prod.tfvars" >> $GITHUB_ENV
           else
             echo "Entorno desarrollo"
             echo "environment=dev" >> $GITHUB_ENV
+            echo "tf_vars_file=dev.tfvars" >> $GITHUB_ENV
           fi
 
       - name: terraform_init
@@ -51,16 +53,10 @@ jobs:
 
       - name: terraform_plan
         run: |
-          terraform plan -var-file $environment.tfvars
-
-      - name: Wait for approval
-        uses: trstringer/manual-approval@v1
-        with:
-          secret: ${{ github.TOKEN }}
-          minimum-approvals: 1
+          terraform plan -var-file $tf_vars_file
             
       - name: terraform_apply
         run: |
-          terraform apply -var-file $environment.tfvars -auto-approve
+          terraform apply -var-file $tf_vars_file -auto-approve
 
   
