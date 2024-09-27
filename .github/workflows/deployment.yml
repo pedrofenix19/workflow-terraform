@@ -30,18 +30,32 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: set_environment
+        run: |
+          if [[ "${{ github.ref }}" == "refs/head/master" ]]; then
+            echo "Entorno productivo"
+            export environment="prod"
+          elif [[ "${{ github.ref }}" == "refs/head/dev"]]; then
+            echo "Entorno desarrollo"
+            export environment="dev"
+          fi
+
       - name: terraform_init
         run: |
           terraform init
+
+      - name: select_workspace
+        run: |
+          terraform workspace select -or-create $environment
 
       - name: terraform_plan
         run: |
           ls -la
           env
-          terraform plan
+          terraform plan -var-file $environment.tfvars
 
       - name: terraform_apply
         run: |
-          terraform apply -auto-approve
+          terraform apply -var-file $environment.tfvars -auto-approve
 
   
