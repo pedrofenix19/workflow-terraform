@@ -12,25 +12,22 @@ env:
     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRETS_ACCESS_KEY }}
 
 jobs:
-    clone_repo:
+    terraform :
         runs-on: ubuntu-latest
-        steps:
+        steps: 
             - name: clone_repo
               uses: actions/checkout@v3
 
-    instalar_terraform:
-        runs-on: ubuntu-latest
-        steps:
             - name: install_terraform
               uses: hashicorp/setup-terraform@v3
               with: 
                 terraform_version: "1.9.6"
 
-    terraform_plan:
-        runs-on: ubuntu-latest
-        steps:
+            - name: terraform_init
+              run: |
+                terraform init
+
             - name: terraform_plan
               run: |
                 ls -la
-                terraform init
                 terraform plan
