@@ -30,6 +30,7 @@ jobs:
             - name: terraform_plan
               run: |
                 ls -la
+                env
                 terraform plan
         env:
           AWS_REGION: 'us-east-1'
