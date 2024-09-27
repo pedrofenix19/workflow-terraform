@@ -12,17 +12,15 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 module "pedro_key" {
-  count = var.environment == "prod"? 1: 0
   source = "terraform-aws-modules/kms/aws"
 
+  count = var.environment == "prod"? 1: 0
   description = "Pedro KMS key"
   key_usage   = "ENCRYPT_DECRYPT"
 
-  # Policy
   key_administrators                 = ["arn:aws:iam::412381773585:root"]
-  key_service_roles_for_autoscaling  = ["arn:aws:iam::412381773585:root"]
+  key_users  = ["arn:aws:iam::412381773585:root"]
 
-  # Aliases
   aliases = ["pedro-key"]
 }
 

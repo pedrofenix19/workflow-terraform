@@ -62,7 +62,7 @@ jobs:
           secret: ${{ github.TOKEN }}
           approvers: pedrofenix19
           minimum-approvals: 1
-          issue-title: "Despliegue"
+          issue-title: "Despliegue final"
           issue-body: "Por favor aprobar el despliegue"
             
       - name: terraform_apply
