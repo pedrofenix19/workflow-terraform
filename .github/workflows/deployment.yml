@@ -58,7 +58,7 @@ jobs:
           terraform plan -var-file $tf_vars_file
 
       - name: manual_approval
-        if: env.environment == "prod"
+        if: env.environment == 'prod'
         uses: trstringer/manual-approval@v1
         with:
           secret: ${{ github.TOKEN }}
